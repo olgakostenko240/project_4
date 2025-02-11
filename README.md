@@ -14,7 +14,7 @@ git@github.com:olgakostenko240/project_4.git
 ```
 poetry install
 ```
-3. Установить пакет для работы с Django
+3. Установите пакет для работы с Django
 ```
 poetry add django
 ```
