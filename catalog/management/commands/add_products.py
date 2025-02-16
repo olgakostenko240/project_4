@@ -3,7 +3,7 @@ from catalog.models import Product, Category
 
 
 class Command(BaseCommand):
-    help = 'Add test products to the database'
+    help = "Add test products to the database"
 
     def handle(self, *args, **options):
         category_1, _ = Category.objects.get_or_create(name="Роза", description="Большой выбор цветов")
@@ -12,9 +12,24 @@ class Command(BaseCommand):
         products = [
             {"name": "Голандская", "description": "Очень красивая красная роза", "category": category_1, "price": 100},
             {"name": "Чайная", "description": "Очень красивая розовая роза", "category": category_1, "price": 70},
-            {"name": "Принц Карнавал", "description": "Очень красивый тюльпан раннего цветения", "category": category_2, "price": 90},
-            {"name": "Оранж Принцесс", "description": "Махровый тюльпан раннего цветения", "category": category_2, "price": 110},
-            {"name": "Авиньон", "description": "Простой тюльпан позднего цветения", "category": category_2, "price": 80},
+            {
+                "name": "Принц Карнавал",
+                "description": "Очень красивый тюльпан раннего цветения",
+                "category": category_2,
+                "price": 90,
+            },
+            {
+                "name": "Оранж Принцесс",
+                "description": "Махровый тюльпан раннего цветения",
+                "category": category_2,
+                "price": 110,
+            },
+            {
+                "name": "Авиньон",
+                "description": "Простой тюльпан позднего цветения",
+                "category": category_2,
+                "price": 80,
+            },
         ]
 
         for product_data in products:
