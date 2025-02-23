@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Много цветов{% endblock %}
+
+{% load my_tags %}
+
+{% block content %}
+
+{% include 'catalog/includes/page_title.html' %}
+
+<div class="row text-center">
+    {% for product in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow" style="width: 18rem;" >
+            <img src="{{ product.photo | media_filter }}" class="img-thumbnail" style="height: 250px;">
+            <div class="card-body">
+                <h3 class="card-title">{{ product.name }}</h3>
+                <h5 class="card-text">{{ product.category }}</h5>
+                <p class="card-text">{{ product.description | truncatechars:27 }}</p>
+                <h5 class="card-title pricing-card-title">Цена: {{ product.price }} руб.</h5>
+                <a class="btn btn-outline-primary" href="{% url 'catalog:one_product' product.pk %}" role="button">Посмотреть</a>
+                <p class="card-text text-end"><small class="text-body-secondary">{{ product.updated_at }}</small></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
