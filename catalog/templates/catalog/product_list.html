@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 
 {% block title %}Много цветов{% endblock %}
 
@@ -6,10 +6,10 @@
 
 {% block content %}
 
-{% include 'includes/page_title.html' %}
+{% include 'catalog/includes/page_title.html' %}
 
 <div class="row text-center">
-    {% for product in products %}
+    {% for product in object_list %}
     <div class="col-3">
         <div class="card mb-4 box-shadow" style="width: 18rem;" >
             <img src="{{ product.photo | media_filter }}" class="img-thumbnail" style="height: 250px;">
@@ -25,7 +25,5 @@
     </div>
     {% endfor %}
 </div>
-
-
 
 {% endblock %}

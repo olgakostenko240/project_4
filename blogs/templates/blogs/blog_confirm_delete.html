@@ -1,0 +1,30 @@
+{% extends 'blogs/base.html' %}
+{% block title %}Блог Садовода{% endblock %}
+{% load my_tags %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text text-center fs-4 fw-bold">Вы действительно хотите удалить блог "{{ object.title }}"</p>
+                        <img src="{{ blog.image | media_filter }}" class="img-fluid rounded-start" style="height: 250px;">
+                        {% csrf_token %}
+                    </div>
+                    <div class="card-header">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <button type="submit" class="btn btn-primary" >Удалить</button>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="{% url 'blogs:blog_list' %}">Отменить</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
