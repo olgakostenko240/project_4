@@ -18,7 +18,11 @@
                 <h5 class="card-text">{{ product.category }}</h5>
                 <p class="card-text">{{ product.description | truncatechars:27 }}</p>
                 <h5 class="card-title pricing-card-title">Цена: {{ product.price }} руб.</h5>
-                <a class="btn btn-outline-primary" href="{% url 'catalog:one_product' product.pk %}" role="button">Посмотреть</a>
+                <div class="d-grid gap-2 d-md-block">
+                    <a class="btn btn-outline-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Посмотреть</a>
+                    <a class="btn btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
+                    <a class="btn btn-outline-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+                </div>
                 <p class="card-text text-end"><small class="text-body-secondary">{{ product.updated_at }}</small></p>
             </div>
         </div>
