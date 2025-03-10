@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Много цветов{% endblock %}
+{% block content %}
+{% include 'catalog/includes/page_title.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <p class="card-text text-center fs-4 fw-bold">Регистрация</p>
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="submit" class="btn btn-primary col-sm-6" >
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
