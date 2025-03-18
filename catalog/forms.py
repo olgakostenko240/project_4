@@ -19,7 +19,7 @@ class CatalogForms(StyleFormMixin, ModelForm):
 
     class Meta:
         model = Product
-        exclude = ("created_at", "updated_at")
+        exclude = ("created_at", "updated_at", "owner")
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
