@@ -40,3 +40,10 @@ class CatalogForms(StyleFormMixin, ModelForm):
         if price < 0:
             raise ValidationError('Цена продукта не может быть отрицательной.')
         return price
+
+
+class CatalogModeratorForms(StyleFormMixin, ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ("status_publication",)
