@@ -1,8 +1,9 @@
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from catalog.models import Product
-from catalog.forms import CatalogForms
+from catalog.forms import CatalogForms, CatalogModeratorForms
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 
 class CatalogListView(ListView):
@@ -36,11 +37,28 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
 
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return CatalogForms
+        if user.has_perm("catalog.can_unpublish_product"):
+            return CatalogModeratorForms
+        raise PermissionDenied
+
 
 class CatalogDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy('catalog:product_list')
+
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return CatalogForms
+        if user.has_perm("catalog.delete_product"):
+            return CatalogModeratorForms
+        raise PermissionDenied
 
 
 class CatalogTemplateView(TemplateView):
