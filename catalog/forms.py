@@ -19,7 +19,7 @@ class CatalogForms(StyleFormMixin, ModelForm):
 
     class Meta:
         model = Product
-        exclude = ("created_at", "updated_at")
+        exclude = ("created_at", "updated_at", "owner")
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
@@ -40,3 +40,10 @@ class CatalogForms(StyleFormMixin, ModelForm):
         if price < 0:
             raise ValidationError('Цена продукта не может быть отрицательной.')
         return price
+
+
+class CatalogModeratorForms(StyleFormMixin, ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ("status_publication",)

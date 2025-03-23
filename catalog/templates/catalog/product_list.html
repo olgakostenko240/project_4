@@ -20,8 +20,10 @@
                 <h5 class="card-title pricing-card-title">Цена: {{ product.price }} руб.</h5>
                 <div class="d-grid gap-2 d-md-block">
                     <a class="btn btn-outline-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Посмотреть</a>
+                    {% if perms.catalog.can_unpublish_product or user == product.owner %}
                     <a class="btn btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
                     <a class="btn btn-outline-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+                    {% endif %}
                 </div>
                 <p class="card-text text-end"><small class="text-body-secondary">{{ product.updated_at }}</small></p>
             </div>
