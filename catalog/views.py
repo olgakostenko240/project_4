@@ -4,14 +4,28 @@ from catalog.models import Product
 from catalog.forms import CatalogForms, CatalogModeratorForms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from catalog.services import get_catalog_from_cache, ProductService
 
 
 class CatalogListView(ListView):
     model = Product
 
+    def get_queryset(self):
+        return get_catalog_from_cache()
+
 
 class CatalogDetailView(LoginRequiredMixin, DetailView):
     model = Product
+    template_name = "catalog/product_detail.html"
+    context_object_name = "product"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        products_id = self.object.id
+        # products_id = self.kwargs["pk"]
+        context["product"] = ProductService.get_product_by_id(products_id)
+        return context
 
 
 class CatalogCreateView(LoginRequiredMixin, CreateView):
